@@ -31,7 +31,7 @@ func change_mode(new_mode):
 		MODE.talk:
 			$CanvasLayer/Text.hide()
 		MODE.mouse:
-			pass
+			$CanvasLayer/Inventory.hide()
 		MODE.move:
 			pass
 		MODE.locked:
@@ -42,6 +42,7 @@ func change_mode(new_mode):
 			$CanvasLayer/Text.show()
 			Global.mouse_mode("arrow")
 		MODE.mouse:
+			$CanvasLayer/Inventory.show()
 			Global.mouse_mode("arrow")
 		MODE.move:
 			Global.mouse_mode("aim")

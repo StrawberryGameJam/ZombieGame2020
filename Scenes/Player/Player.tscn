@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player/player.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Player/Camera2D.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Player/Text.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Player/Inventory.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 33.5976
@@ -37,6 +38,9 @@ script = ExtResource( 3 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Text" parent="CanvasLayer" instance=ExtResource( 4 )]
+visible = false
+
+[node name="Inventory" parent="CanvasLayer" instance=ExtResource( 5 )]
 visible = false
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
