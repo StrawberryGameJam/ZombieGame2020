@@ -53,7 +53,9 @@ func change_mode(new_mode):
 func _physics_process(delta):
 	match mode:
 		MODE.talk:
-			if Input.is_action_just_pressed("ui_accept"):
+			if (Input.is_action_just_pressed("ui_accept") or
+				Input.is_action_just_pressed("ui_interact") or 
+				Input.is_action_just_pressed("shoot")):
 				change_mode(MODE.move)
 		MODE.mouse:
 			if Input.is_action_just_pressed("ui_accept"):
