@@ -10,6 +10,9 @@ enum MODE{
 export(int) var SPEED = 300
 onready var raycast = $RayCast2D
 
+var max_hp = 1000
+var current_hp
+
 var interacting_areas = []
 var mode = MODE.move
 
@@ -21,6 +24,7 @@ func _ready():
 	set_physics_process(true)
 	set_process(false)
 	add_to_group("Player")
+	current_hp = max_hp
 	$Interaction.connect("area_entered",self,"_on_area_entered")
 	$Interaction.connect("area_exited",self,"_on_area_exited")
 	$Interaction.add_to_group("Player_inter")
@@ -54,7 +58,7 @@ func _physics_process(delta):
 	match mode:
 		MODE.talk:
 			if Input.is_action_just_pressed("ui_accept"):
-				change_mode(MODE.move)
+				change_mode(MODE.movcurrent_hpe)
 		MODE.mouse:
 			if Input.is_action_just_pressed("ui_accept"):
 				change_mode(MODE.move)
@@ -73,6 +77,7 @@ func _physics_process(delta):
 				change_mode(MODE.talk)
 			var velocity = Vector2()
 			if Input.is_action_pressed("ui_up"):
+				OneHit(10)
 				velocity.y -= 1
 			if Input.is_action_pressed("ui_down"):
 				velocity.y +=1
@@ -97,6 +102,12 @@ func _physics_process(delta):
 	#and event.button_index == 1 
 	#and event.pressed):
 #	pass
+
+func OneHit(damage):
+	current_hp = current_hp - damage
+	get_node("HealthBar").value = int((current_hp/max_hp)*100)
+	if(current_hp <= 0):
+		kill()
 
 func _on_area_entered(area):
 	if area.is_in_group("Interactible"):
