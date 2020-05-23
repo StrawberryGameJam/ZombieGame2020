@@ -13,9 +13,9 @@ radius = 20.8585
 extents = Vector2( 32.4751, 107.107 )
 
 [sub_resource type="NavigationPolygon" id=3]
-vertices = PoolVector2Array( -38.4813, -130.294, 1072.56, -143.926, 314.846, -35.8215, 239.688, -37.4917, 1061.2, 562.689, 303.155, 251.45, -29.3929, 553.6, 84.3611, 254.79, 82.6909, 179.632, 241.358, 182.972 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 2, 1, 4, 5 ), PoolIntArray( 5, 4, 6, 7 ), PoolIntArray( 7, 6, 0, 8 ), PoolIntArray( 8, 0, 3, 9 ) ]
-outlines = [ PoolVector2Array( -38.4813, -130.294, 1072.56, -143.926, 1061.2, 562.689, -29.3929, 553.6 ), PoolVector2Array( 239.688, -37.4917, 314.846, -35.8215, 303.155, 251.45, 84.3611, 254.79, 82.6909, 179.632, 241.358, 182.972 ) ]
+vertices = PoolVector2Array( -54.1788, -112.602, 1079.77, -108.5, 308.768, -28.5292, 236.999, -24.4281, 306.871, 195.147, 1084.79, 177.524, 1077.72, 543.573, 306.871, 258.085, -54.1788, 543.573, 81.1572, 256.497, 79.1067, 180.627, 236.999, 178.576 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 2, 1, 5, 6, 7 ), PoolIntArray( 7, 6, 8, 9 ), PoolIntArray( 9, 8, 0, 10 ), PoolIntArray( 10, 0, 3, 11 ) ]
+outlines = [ PoolVector2Array( -54.1788, -112.602, 1079.77, -108.5, 1084.79, 177.524, 1077.72, 543.573, -54.1788, 543.573 ), PoolVector2Array( 236.999, -24.4281, 236.999, 178.576, 79.1067, 180.627, 81.1572, 256.497, 306.871, 258.085, 306.871, 195.147, 308.768, -28.5292 ) ]
 
 [node name="Main" type="Node2D"]
 
@@ -28,6 +28,7 @@ texture = ExtResource( 1 )
 position = Vector2( 506.672, 252.2 )
 
 [node name="Inter" type="Area2D" parent="."]
+editor/display_folded = true
 position = Vector2( 521.238, 107.398 )
 script = ExtResource( 3 )
 ICON_POS = Vector2( 20, -20 )
@@ -45,6 +46,7 @@ position = Vector2( 41.7546, 86.8495 )
 script = ExtResource( 5 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+editor/display_folded = true
 position = Vector2( 274.223, 88.2823 )
 __meta__ = {
 "_edit_group_": true
@@ -60,6 +62,7 @@ position = Vector2( 0, 2.32133 )
 shape = SubResource( 2 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
+editor/display_folded = true
 position = Vector2( 194.815, 222.878 )
 rotation = 1.58765
 
@@ -73,6 +76,7 @@ position = Vector2( 0, 2.32133 )
 shape = SubResource( 2 )
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
+editor/display_folded = true
 position = Vector2( 194.815, 222.878 )
 rotation = 1.57323
 __meta__ = {
@@ -91,5 +95,5 @@ shape = SubResource( 2 )
 [node name="Navigation2D" type="Navigation2D" parent="."]
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
-position = Vector2( -2.27209, 5.61243 )
+position = Vector2( 3.87955, 3.56193 )
 navpoly = SubResource( 3 )
