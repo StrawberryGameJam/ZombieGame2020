@@ -21,7 +21,6 @@ var max_h = 0
 var min_w = 0
 var max_w = 0
 
-
 var path #= AStar.new()# AStar pathfinding object
 var start_room = null
 var end_room = null
@@ -56,6 +55,7 @@ func make_rooms(pos_x, pos_y):
 			room.mode = RigidBody2D.MODE_STATIC
 			room_positions = room_positions  + [Vector3(room.position.x, room.position.y, 0)]
 			room_positions_local =  room_positions_local + [Vector3(room.position.x, room.position.y, 0)]
+			
 			count += 1
 			if(room.position.x > max_h + 100):
 				max_h = room.position.x
@@ -120,12 +120,15 @@ func _input(event):
 		add_child(player)
 		find_start_room()
 		find_end_room()
-		spawn_zombies()
+	
 		player.position = start_room.position
 		player.set_start(start_room.position)
 		play_mode = true
-		Global.mouse_mode("aim")
+		zombie = Zombie.instance()
+		add_child(zombie)
+		zombie.position = end_room.position
 		$Timer.connect("timeout", self, "_on_Timer_timeout")
+		zombie.set_player(player)
 		$Timer.start(3)
 
 func join_paths(path1, path2,player_point):
@@ -201,8 +204,8 @@ func make_map():
 		full_rect = full_rect.merge(r)
 	var topleft = Map.world_to_map(full_rect.position)
 	var bottomright = Map.world_to_map(full_rect.end)
-	for x in range(topleft.x-10, bottomright.x+10):
-		for y in range(topleft.y-10, bottomright.y+10):
+	for x in range(topleft.x, bottomright.x):
+		for y in range(topleft.y, bottomright.y):
 			Map.set_cell(x, y, 1)	
 #
 #	# Carve rooms
@@ -211,8 +214,8 @@ func make_map():
 		var s = (room.size / tile_size).floor()
 		var pos = Map.world_to_map(room.position)
 		var ul = (room.position / tile_size).floor() - s
-		for x in range(2, s.x * 2 - 1):
-			for y in range(2, s.y * 2 - 1):
+		for x in range(1, s.x * 2 - 1):
+			for y in range(1, s.y * 2 - 1):
 				Map.set_cell(ul.x + x, ul.y + y, 0)
 		# Carve connecting corridor
 		var p = path.get_closest_point(Vector3(room.position.x, 
@@ -235,10 +238,10 @@ func carve_path(pos1, pos2):
 	# choose either x/y or y/x
 	var x_y = pos1
 	var y_x = pos2
-	for x in range(pos1.x-x_diff, pos2.x+x_diff, x_diff):
+	for x in range(pos1.x, pos2.x, x_diff):
 		Map.set_cell(x, x_y.y, 0)
 		Map.set_cell(x, x_y.y + y_diff, 0)  # widen the corridor
-	for y in range(pos1.y-x_diff, pos2.y+y_diff, y_diff):
+	for y in range(pos1.y, pos2.y, y_diff):
 		Map.set_cell(y_x.x, y, 0)
 		Map.set_cell(y_x.x + x_diff, y, 0)
 	
@@ -255,34 +258,3 @@ func find_end_room():
 		if room.position.x > max_x:
 			end_room = room
 			max_x = room.position.x
-	var gate = Sprite.new()
-	gate.texture = load("res://icon.png")
-	end_room.add_child(gate)
-	gate.position = end_room.size
-	gate.position.x -=32
-	gate.position.y = 0
-	gate.centered  = true
-
-func spawn_zombies():
-	for room in $Rooms.get_children():
-		if room == end_room or room == start_room:
-			continue
-		var zombie = Zombie.instance()
-		add_child(zombie)
-		var rx = randf()-0.5
-		var ry = randf()-0.5
-		zombie.position = room.position
-		zombie.position.x += rx*room.size.x*0.8
-		zombie.position.y += ry*room.size.y*0.8
-		zombie.player = player
-	pass
-
-func spawn_in_room(room):
-	var zombie = Zombie.instance()
-	add_child(zombie)
-	var rx = randf()-0.5
-	var ry = randf()-0.5
-	zombie.position = room.position
-	zombie.position.x += rx*room.size.x*0.8
-	zombie.position.y += ry*room.size.y*0.8
-	zombie.player = player
