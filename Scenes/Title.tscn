@@ -1,0 +1,95 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://fonts/Oswald/Oswald-Medium.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://fonts/Oswald/Text.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Scenes/Title.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 160
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=2]
+default_font = ExtResource( 2 )
+Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+Button/constants/hseparation = 10
+Button/fonts/font = null
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+
+[node name="Title" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color( 0.2, 0.568627, 0.698039, 1 )
+polygon = PoolVector2Array( 1140.72, -87.7794, 1155.9, 716.714, -81.2004, 705.33, -68.3195, -76.6219 )
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -414.5
+margin_right = 414.5
+margin_bottom = 238.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Zombie Game"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -256.0
+margin_right = 150.0
+margin_bottom = 256.0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NewGame" type="Button" parent="VBoxContainer"]
+margin_top = 200.0
+margin_right = 300.0
+margin_bottom = 275.0
+rect_min_size = Vector2( 300, 75 )
+theme = SubResource( 2 )
+text = "New Game"
+
+[node name="Continue" type="Button" parent="VBoxContainer"]
+margin_top = 279.0
+margin_right = 300.0
+margin_bottom = 354.0
+rect_min_size = Vector2( 300, 75 )
+theme = SubResource( 2 )
+text = "Continue"
+
+[node name="Options" type="Button" parent="VBoxContainer"]
+margin_top = 358.0
+margin_right = 300.0
+margin_bottom = 433.0
+rect_min_size = Vector2( 300, 75 )
+theme = SubResource( 2 )
+text = "Options"
+
+[node name="Credits" type="Button" parent="VBoxContainer"]
+margin_top = 437.0
+margin_right = 300.0
+margin_bottom = 512.0
+rect_min_size = Vector2( 300, 75 )
+theme = SubResource( 2 )
+text = "Credits"

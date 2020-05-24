@@ -16,6 +16,7 @@ var scent_trail = []
 
 var interacting_areas = []
 var mode = MODE.move
+var bullet_scene = preload("res://Scenes/Player/Bullet.tscn")
 
 func _ready():
 #	var ScentTimer = Timer.new()
@@ -66,7 +67,9 @@ func change_mode(new_mode):
 func _physics_process(delta):
 	match mode:
 		MODE.talk:
-			if Input.is_action_just_pressed("ui_accept"):
+			if (Input.is_action_just_pressed("ui_accept") or
+				Input.is_action_just_pressed("ui_interact") or 
+				Input.is_action_just_pressed("shoot")):
 				change_mode(MODE.move)
 		MODE.mouse:
 			if Input.is_action_just_pressed("ui_accept"):
@@ -101,9 +104,12 @@ func _physics_process(delta):
 # warning-ignore:return_value_discarded
 			move_and_slide(SPEED*velocity.normalized())
 			if Input.is_action_just_pressed("shoot"):
-				var coll = raycast.get_collider()
-				if raycast.is_colliding() and coll.has_method("kill"):
-					coll.kill()
+				($Gunpoint.global_position - global_position).normalized()
+				var bullet = bullet_scene.instance()
+				get_parent().add_child(bullet)
+				bullet.position = ($Gunpoint.position).rotated(rotation) + position
+				bullet.direction = (bullet.position - ($Guncane.position).rotated(rotation) + position).normalized()
+
 	
 	pass
 
