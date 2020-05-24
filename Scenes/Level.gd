@@ -223,6 +223,20 @@ func spawn_zombies():
 			continue
 		var zombie = Zombie.instance()
 		add_child(zombie)
+		var rx = randf()-0.5
+		var ry = randf()-0.5
 		zombie.position = room.position
+		zombie.position.x += rx*room.size.x*0.8
+		zombie.position.y += ry*room.size.y*0.8
 		zombie.player = player
 	pass
+
+func spawn_in_room(room):
+	var zombie = Zombie.instance()
+	add_child(zombie)
+	var rx = randf()-0.5
+	var ry = randf()-0.5
+	zombie.position = room.position
+	zombie.position.x += rx*room.size.x*0.8
+	zombie.position.y += ry*room.size.y*0.8
+	zombie.player = player
