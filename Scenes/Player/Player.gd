@@ -149,6 +149,7 @@ func shoot():
 	get_parent().add_child(bullet)
 	bullet.position = ($Gunpoint.position).rotated(rotation) + position
 	bullet.direction = rel_mouse_pos.normalized()
+	bullet.rotation = rotation
 
 func anim_handler():
 	if ($AnimationPlayer.current_animation == "Rifle-Shoot" or
