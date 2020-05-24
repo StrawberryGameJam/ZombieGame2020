@@ -63,7 +63,8 @@ func attack(body):
 		$AnimationPlayer.play("Attack")
 
 func attack_frame():
-	player.kill()
+	if $Area2D.overlaps_body(player):
+		player.kill()
 
 func kill():
 	queue_free()

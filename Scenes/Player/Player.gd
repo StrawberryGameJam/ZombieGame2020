@@ -141,6 +141,7 @@ func _on_area_exited(area):
  
 func kill():
 # warning-ignore:return_value_discarded
+	print("ai")
 	pass
 	#get_tree().reload_current_scene()
 
@@ -158,8 +159,6 @@ func anim_handler():
 			return
 	if velocity.length() > 0 and $AnimationPlayer.current_animation == "Rifle-Idle":
 		$AnimationPlayer.play("Rifle-Move")
-		print("start mover")
 	elif velocity.length() == 0 and $AnimationPlayer.current_animation == "Rifle-Move":
 		$AnimationPlayer.play("Rifle-Idle")
-		print("start idle")
 		

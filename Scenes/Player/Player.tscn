@@ -178,12 +178,12 @@ position = Vector2( 3.00569, 5.18761 )
 
 [node name="Legs" type="Sprite" parent="."]
 scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 61 )
+texture = ExtResource( 53 )
 
 [node name="icon" type="Sprite" parent="."]
 position = Vector2( 6.77808, -3.61498 )
 scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 45 )
+texture = ExtResource( 28 )
 
 [node name="Interaction" type="Area2D" parent="."]
 visible = false
