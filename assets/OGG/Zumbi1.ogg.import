@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Zumbi1.ogg-19d176fe878643d0714fee205b8810c6.oggstr"
+
+[deps]
+
+source_file="res://assets/OGG/Zumbi1.ogg"
+dest_files=[ "res://.import/Zumbi1.ogg-19d176fe878643d0714fee205b8810c6.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

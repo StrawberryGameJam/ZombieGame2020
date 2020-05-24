@@ -112,6 +112,19 @@ func _physics_process(delta):
 				get_parent().add_child(bullet)
 				bullet.position = ($Gunpoint.position).rotated(rotation) + position
 				bullet.direction = rel_mouse_pos.normalized()
+				var speech_player = AudioStreamPlayer2D.new()
+				add_child(speech_player)
+				var audio_file1 = "res://assets/OGG/TiroShotgun.ogg"
+				
+				print("ola amigo cade meu som?1")
+				var sfx = load(audio_file1) 
+				
+				sfx.set_loop(false)
+				speech_player.volume_db = -15.0
+				speech_player.stream = sfx
+				
+				speech_player.play()
+				yield(get_tree().create_timer(1), 'timeout')
 
 	
 	pass

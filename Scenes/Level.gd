@@ -57,13 +57,13 @@ func make_rooms(pos_x, pos_y):
 			room_positions = room_positions  + [Vector3(room.position.x, room.position.y, 0)]
 			room_positions_local =  room_positions_local + [Vector3(room.position.x, room.position.y, 0)]
 			count += 1
-			if(room.position.x > max_h + 100):
+			if(room.position.x > max_h + 10*tile_size):
 				max_h = room.position.x
-			elif(room.position.x < min_h - 100):
+			elif(room.position.x < min_h - 10*tile_size):
 				min_h = room.position.x
-			if(room.position.y < min_w + 100):
+			if(room.position.y < min_w + 10*tile_size):
 				min_w = room.position.y
-			elif(room.position.y > max_w - 100):
+			elif(room.position.y > max_w - 10*tile_size):
 				max_w = room.position.y
 		counter += 1
 	criou = false
@@ -116,6 +116,7 @@ func _on_Timer_timeout():
 	$Timer.start(3)
 func _input(event):
 	if event.is_action_pressed('ui_cancel'):
+		$AudioStreamPlayer.play()
 		player = Player.instance()
 		add_child(player)
 		find_start_room()

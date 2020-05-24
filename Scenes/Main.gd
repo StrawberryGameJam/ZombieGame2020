@@ -67,7 +67,7 @@ func make_rooms(pos_x, pos_y):
 				max_w = room.position.y
 		counter += 1
 	criou = false
-	print(coos)
+#	print(coos)
 	yield(get_tree(), 'idle_frame')
 	# generate a minimum spanning tree connecting the rooms
 	room_positions.append(Vector3(pos_x, pos_y, 0))
@@ -149,9 +149,9 @@ func join_paths(path1, path2,player_point):
 		for connection in connections:
 			j_path.connect_points(i+lpoints_p1,connection+lpoints_p1)
 	j_path.connect_points(closest_id2,closest_id1)
-	print(path1.get_points())
-	print(path2.get_points())
-	print(j_path.get_points())
+#	print(path1.get_points())
+#	print(path2.get_points())
+#	print(j_path.get_points())
 	
 	return j_path
 
