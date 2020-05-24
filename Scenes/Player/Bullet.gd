@@ -10,7 +10,9 @@ var speed = 800
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_physics_process(true)
+# warning-ignore:return_value_discarded
 	connect("body_entered",self,"_on_body_entered")
+# warning-ignore:return_value_discarded
 	$Timer.connect("timeout",self,"queue_free")
 	pass # Replace with function body.
 # Called every frame. 'delta' is the elapsed time since the previous frame.

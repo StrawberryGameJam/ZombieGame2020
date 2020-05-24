@@ -8,7 +8,6 @@ enum MODE{
 }
 
 export(int) var SPEED = 300
-onready var raycast = $RayCast2D
 
 const scent_scene = preload("res://Scenes/Scent.tscn")
 
@@ -17,12 +16,15 @@ var scent_trail = []
 var interacting_areas = []
 var mode = MODE.move
 var bullet_scene = preload("res://Scenes/Player/Bullet.tscn")
+var rel_mouse_pos = Vector2()
+var velocity = Vector2()
 
 var start_position = Vector2()
 func set_start(start):
 	start_position = start
 
 func _ready():
+	$AnimationPlayer.play("Rifle-Idle")
 #	var ScentTimer = Timer.new()
 #	add_child(ScentTimer)
 #	ScentTimer.autostart = true
@@ -69,6 +71,7 @@ func change_mode(new_mode):
 
 # warning-ignore:unused_argument
 func _physics_process(delta):
+	anim_handler()
 	match mode:
 		MODE.talk:
 			if (Input.is_action_just_pressed("ui_accept") or
@@ -91,7 +94,7 @@ func _physics_process(delta):
 # warning-ignore:unused_variable
 				var res = area.interact(self)
 				change_mode(MODE.talk)
-			var velocity = Vector2()
+			velocity = Vector2()
 			if Input.is_action_pressed("ui_up"):
 				velocity.y -= 1
 			if Input.is_action_pressed("ui_down"):
@@ -102,16 +105,13 @@ func _physics_process(delta):
 				velocity.x +=1
 			if Input.is_action_just_pressed("ui_accept"):
 				change_mode(MODE.mouse)
-			var rel_mouse_pos = $Camera2D.get_mouse_relative_position(global_position)
+			rel_mouse_pos = $Camera2D.get_mouse_relative_position(global_position)
 			rotation = rel_mouse_pos.angle()
 # warning-ignore:return_value_discarded
 			move_and_slide(SPEED*velocity.normalized())
 			if Input.is_action_just_pressed("shoot"):
+				$AnimationPlayer.play("Rifle-Shoot")
 				
-				var bullet = bullet_scene.instance()
-				get_parent().add_child(bullet)
-				bullet.position = ($Gunpoint.position).rotated(rotation) + position
-				bullet.direction = rel_mouse_pos.normalized()
 
 	
 	pass
@@ -141,4 +141,24 @@ func _on_area_exited(area):
  
 func kill():
 # warning-ignore:return_value_discarded
-	get_tree().reload_current_scene()
+	pass
+	#get_tree().reload_current_scene()
+
+func shoot():
+	var bullet = bullet_scene.instance()
+	get_parent().add_child(bullet)
+	bullet.position = ($Gunpoint.position).rotated(rotation) + position
+	bullet.direction = rel_mouse_pos.normalized()
+
+func anim_handler():
+	if ($AnimationPlayer.current_animation == "Rifle-Shoot" or
+		$AnimationPlayer.current_animation == "Rifle-Melee" or
+		$AnimationPlayer.current_animation == "Rifle-Reload"):
+			return
+	if velocity.length() > 0 and $AnimationPlayer.current_animation == "Rifle-Idle":
+		$AnimationPlayer.play("Rifle-Move")
+		print("start mover")
+	elif velocity.length() == 0 and $AnimationPlayer.current_animation == "Rifle-Move":
+		$AnimationPlayer.play("Rifle-Idle")
+		print("start idle")
+		
