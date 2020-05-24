@@ -22,6 +22,7 @@ func _ready():
 #	add_child(ScentTimer)
 #	ScentTimer.autostart = true
 #	ScentTimer.wait_time = 0.1
+# warning-ignore:return_value_discarded
 	$ScentTimer.connect("timeout", self, "add_scent")
 	yield(get_tree(), "idle_frame")
 	get_tree().call_group("zombies", "set_player", self)
@@ -30,7 +31,9 @@ func _ready():
 	set_physics_process(true)
 	set_process(false)
 	add_to_group("Player")
+# warning-ignore:return_value_discarded
 	$Interaction.connect("area_entered",self,"_on_area_entered")
+# warning-ignore:return_value_discarded
 	$Interaction.connect("area_exited",self,"_on_area_exited")
 	$Interaction.add_to_group("Player_inter")
 	pass
@@ -59,6 +62,7 @@ func change_mode(new_mode):
 			Global.mouse_mode("arrow")
 	pass
 
+# warning-ignore:unused_argument
 func _physics_process(delta):
 	match mode:
 		MODE.talk:
@@ -78,6 +82,7 @@ func _physics_process(delta):
 					if interacting_areas.empty():
 						return
 					area = interacting_areas.back()
+# warning-ignore:unused_variable
 				var res = area.interact(self)
 				change_mode(MODE.talk)
 			var velocity = Vector2()
@@ -93,6 +98,7 @@ func _physics_process(delta):
 				change_mode(MODE.mouse)
 			var rel_mouse_pos = $Camera2D.get_mouse_relative_position(global_position)
 			rotation = rel_mouse_pos.angle()
+# warning-ignore:return_value_discarded
 			move_and_slide(SPEED*velocity.normalized())
 			if Input.is_action_just_pressed("shoot"):
 				var coll = raycast.get_collider()
@@ -125,4 +131,5 @@ func _on_area_exited(area):
 
  
 func kill():
+# warning-ignore:return_value_discarded
 	get_tree().reload_current_scene()
