@@ -1,6 +1,6 @@
 extends KinematicBody2D
  
-const MOVE_SPEED = 50
+const MOVE_SPEED = 250
  
  
 var player = null
