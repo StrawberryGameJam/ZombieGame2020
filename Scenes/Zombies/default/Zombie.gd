@@ -22,23 +22,26 @@ func _physics_process(delta):
  
 func chase_target():
 	if(player != null):
-	  var look     = get_node("RayCast2D")
-	  look.cast_to = (player.position - position)
-	  look.force_raycast_update()
+		var look = get_node("RayCast2D")
+		look.cast_to = (player.position - position).rotated(-rotation)
+		look.force_raycast_update()
+		$Sprite2.position = look.cast_to
 	
-	  # if we can see the target, chase it
-	  if !look.is_colliding():
-	    dir = look.cast_to.normalized()
+		# if we can see the target, chase it
+		if not look.is_colliding():
+			print("ta vendo o target")
+			dir = (player.position - position).normalized()
 	
 	  # or chase first scent we can see
-	  else:
-	    for scent in player.scent_trail:
-	      look.cast_to = (scent.position - position)
-	      look.force_raycast_update()
-	
-	      if !look.is_colliding():
-	        dir = look.cast_to.normalized()
-	        break
+		else:
+			print("nao ta vendo o player")
+			for scent in player.scent_trail:
+				look.cast_to = (scent.position - position).rotated(-rotation)
+				look.force_raycast_update()
+			
+				if not look.is_colliding():
+					dir = (scent.position - position).normalized()
+					break
 			
 func attack(body):
 	if(body == player):
