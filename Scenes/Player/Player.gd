@@ -18,6 +18,10 @@ var interacting_areas = []
 var mode = MODE.move
 var bullet_scene = preload("res://Scenes/Player/Bullet.tscn")
 
+var start_position = Vector2()
+func set_start(start):
+	start_position = start
+
 func _ready():
 #	var ScentTimer = Timer.new()
 #	add_child(ScentTimer)
@@ -80,7 +84,6 @@ func _physics_process(delta):
 					return
 				var area = interacting_areas.back()
 				while not $Interaction.overlaps_area(area):
-					print("area_missing")
 					interacting_areas.erase(area)
 					if interacting_areas.empty():
 						return

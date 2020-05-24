@@ -31,7 +31,6 @@ func _ready():
 func _input(event):
 	if event is InputEventKey and event.scancode in map.keys():
 		if map[event.scancode] == "ui_escape" and event.pressed:
-			print("pausou")
 			var current_scene = get_tree().get_current_scene()
 			if not get_tree().paused:
 				get_tree().paused = true

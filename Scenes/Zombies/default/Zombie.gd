@@ -16,18 +16,23 @@ func _ready():
 func _process(delta):
 	if player == null:
 		return
-		
+	
+	var has_scent = false
 	var space_state = get_world_2d().direct_space_state
-	var result = space_state.intersect_ray(global_position, player.global_position)
+	var result = space_state.intersect_ray(global_position, player.global_position,[self],player.collision_mask)
+	print(result)
 	if !result.empty() and result.collider == player:
 		obj = - global_position + player.global_position
+		has_scent = true
 	else:
 		for scent in player.scent_trail:
-			result = space_state.intersect_ray(global_position, scent.global_position)
+			result = space_state.intersect_ray(global_position, scent.global_position,[self],player.collision_mask)
 			if result.empty():
 				obj = - global_position + scent.global_position
+				has_scent = true
 				break
-	
+	if not has_scent:
+		return
 	rotation = obj.angle()
 	var vel = (obj.normalized())*MOVE_SPEED
 	var res_par_l = space_state.intersect_ray(global_position, $Sprite/Left.global_position)
