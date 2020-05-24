@@ -3,12 +3,12 @@
 [ext_resource path="res://Character.gd" type="Script" id=1]
 [ext_resource path="res://Camera2D.gd" type="Script" id=2]
 
-[sub_resource type="StreamTexture" id=2]
+[sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/player.png-be2216fcaabb5c62aa2466cd9a5726a8.stex"
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=2]
 
-[node name="Character" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -16,13 +16,17 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.4, 0.4 )
-texture = SubResource( 2 )
+texture = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 show_behind_parent = true
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 2 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 100, 0 )

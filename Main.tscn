@@ -20,3 +20,7 @@ tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 format = 1
+
+[node name="Timer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 3.0

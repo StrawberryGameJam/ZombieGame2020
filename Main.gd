@@ -2,15 +2,16 @@ extends Node2D
 
 var Room = preload("res://Room.tscn")
 var Player = preload("res://Character.tscn")
+var Zombie = preload("res://Zombie.tscn")
 var font = preload("res://assets/RobotoBold120.tres")
 onready var Map = $TileMap
-
+onready var STimer = $Timer
 var tile_size = 32  # size of a tile in the TileMap
-var num_rooms = 10  # number of rooms to generate
-var min_size = 4  # minimum room size (in tiles)
+var num_rooms = 5  # number of rooms to generate
+var min_size = 4 # minimum room size (in tiles)
 var max_size = 10  # maximum room size (in tiles)
 var hspread = 400  # horizontal spread (in pixels)
-var cull = 0.5  # chance to cull room
+var cull = 0  # chance to cull room
 var criou = false
 var count = 0
 var room_positions = []
@@ -25,10 +26,12 @@ var start_room = null
 var end_room = null
 var play_mode = false  
 var player = null
-
+var zombie = null
+ 
 func _ready():
 	randomize()
 	make_rooms(0, 0)
+	
 	
 func make_rooms(pos_x, pos_y):
 	for i in range(num_rooms):
@@ -88,16 +91,32 @@ func _process(delta):
 		if player.position.y < min_w and not criou:
 			make_rooms(player.position.x, player.position.y-10)
 			criou = true
+		
+		
+			
 	update()
-	
+func _on_Timer_timeout():
+	var n_zombie = Zombie.instance()
+	add_child(n_zombie)
+	n_zombie.position = end_room.position
+	n_zombie.set_player(player)
+	$Timer.start(3)
 func _input(event):
 	if event.is_action_pressed('ui_cancel'):
 		player = Player.instance()
 		add_child(player)
 		find_start_room()
 		find_end_room()
+	
 		player.position = start_room.position
+		player.set_start(start_room.position)
 		play_mode = true
+		zombie = Zombie.instance()
+		add_child(zombie)
+		zombie.position = end_room.position
+		$Timer.connect("timeout", self, "_on_Timer_timeout")
+		zombie.set_player(player)
+		$Timer.start(3)
 
 func find_mst(nodes):
 	# Prim's algorithm

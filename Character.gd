@@ -2,9 +2,19 @@ extends KinematicBody2D
 
 export var id = 0
 export var speed = 250
-
+onready var raycast = $RayCast2D
 var velocity = Vector2()
-
+var start_position = Vector2()
+func set_start(start):
+	start_position = start
+func _ready():
+	yield(get_tree(), "idle_frame")
+	get_tree().call_group("zombies", "set_player", self)
+#	Global.mouse_mode("aim")
+	set_process_input(true)
+	set_physics_process(true)
+	set_process(false)
+	add_to_group("Player")
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.scancode == KEY_B:
@@ -23,6 +33,11 @@ func get_input():
 	if Input.is_action_pressed('ui_down'):
 		velocity.y += 1
 	velocity = velocity.normalized() * speed
+	
+	if Input.is_action_pressed("shoot"):
+		var coll = raycast.get_collider()
+		if raycast.is_colliding() and coll.has_method("kill"):
+			coll.kill()
 
 #func _physics_process(delta):
 #	get_input()
@@ -35,3 +50,9 @@ func _physics_process(delta):
 	rotation = rel_mouse_pos.angle()
 	
 	pass
+func kill():
+	print("infelizmente morri")
+	position = start_position
+	
+ 
+	
