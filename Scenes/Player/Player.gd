@@ -104,11 +104,11 @@ func _physics_process(delta):
 # warning-ignore:return_value_discarded
 			move_and_slide(SPEED*velocity.normalized())
 			if Input.is_action_just_pressed("shoot"):
-				($Gunpoint.global_position - global_position).normalized()
+				
 				var bullet = bullet_scene.instance()
 				get_parent().add_child(bullet)
 				bullet.position = ($Gunpoint.position).rotated(rotation) + position
-				bullet.direction = (bullet.position - ($Guncane.position).rotated(rotation) + position).normalized()
+				bullet.direction = rel_mouse_pos.normalized()
 
 	
 	pass
