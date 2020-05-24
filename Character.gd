@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 export var id = 0
-export var speed = 250
+export var speed = 300
 onready var raycast = $RayCast2D
 var velocity = Vector2()
 var start_position = Vector2()
