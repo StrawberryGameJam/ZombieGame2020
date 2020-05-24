@@ -104,10 +104,15 @@ func _process(delta):
 			
 	update()
 func _on_Timer_timeout():
-	var n_zombie = Zombie.instance()
-	add_child(n_zombie)
-	n_zombie.position = end_room.position
-	n_zombie.set_player(player)
+	if play_mode:
+		var pointid = path.get_closest_point(Vector3(player.position.x,player.position.y,0))
+		var list_points = path.get_point_connections(pointid)
+		var room = path.get_point_position(list_points[randi() % len(list_points)])
+		var n_zombie = Zombie.instance()
+		add_child(n_zombie)
+		n_zombie.position.x = room.x
+		n_zombie.position.y = room.y
+		n_zombie.set_player(player)
 	$Timer.start(3)
 func _input(event):
 	if event.is_action_pressed('ui_cancel'):
