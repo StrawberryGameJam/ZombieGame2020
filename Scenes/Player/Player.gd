@@ -10,10 +10,19 @@ enum MODE{
 export(int) var SPEED = 300
 onready var raycast = $RayCast2D
 
+const scent_scene = preload("res://Scenes/Scent.tscn")
+
+var scent_trail = []
+
 var interacting_areas = []
 var mode = MODE.move
 
 func _ready():
+#	var ScentTimer = Timer.new()
+#	add_child(ScentTimer)
+#	ScentTimer.autostart = true
+#	ScentTimer.wait_time = 0.1
+	$ScentTimer.connect("timeout", self, "add_scent")
 	yield(get_tree(), "idle_frame")
 	get_tree().call_group("zombies", "set_player", self)
 	Global.mouse_mode("aim")
@@ -97,6 +106,13 @@ func _physics_process(delta):
 	#and event.button_index == 1 
 	#and event.pressed):
 #	pass
+func add_scent():
+	var scent      = scent_scene.instance()
+	get_parent().add_child(scent)
+	scent.player   = self
+	scent.position = position
+	scent_trail.push_front(scent)
+
 
 func _on_area_entered(area):
 	if area.is_in_group("Interactible"):
