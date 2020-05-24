@@ -16,8 +16,14 @@ _global_script_class_icons={
 [application]
 
 config/name="Godot3_DungeonGen03"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://Scenes/Level.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=600
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [importer_defaults]
 
@@ -92,4 +98,5 @@ shoot={
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 environment/default_environment="res://default_env.tres"

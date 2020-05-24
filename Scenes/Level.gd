@@ -1,13 +1,12 @@
 extends Node2D
 
-var Room = preload("res://Room.tscn")
+var Room = preload("res://Scenes/Room.tscn")
 var Player = preload("res://Character.tscn")
-var Zombie = preload("res://Zombie.tscn")
 var font = preload("res://assets/RobotoBold120.tres")
 onready var Map = $TileMap
 onready var STimer = $Timer
 var tile_size = 32  # size of a tile in the TileMap
-var num_rooms = 5  # number of rooms to generate
+var num_rooms = 12 # number of rooms to generate
 var min_size = 4 # minimum room size (in tiles)
 var max_size = 10  # maximum room size (in tiles)
 var hspread = 400  # horizontal spread (in pixels)
@@ -78,29 +77,14 @@ func _draw():
 		draw_string(font, end_room.position-Vector2(125,0), "end", Color(1,1,1))
 
 func _process(delta):
-	if play_mode:
-		if player.position.x > max_h and not criou:
-			make_rooms(player.position.x + 10, player.position.y)
-			criou = true
-		if player.position.x < min_h and not criou:
-			make_rooms(player.position.x-10, player.position.y)
-			criou = true
-		if player.position.y > max_w and not criou:
-			make_rooms(player.position.x, player.position.y+10)
-			criou = true
-		if player.position.y < min_w and not criou:
-			make_rooms(player.position.x, player.position.y-10)
-			criou = true
-		
-		
-			
 	update()
 func _on_Timer_timeout():
-	var n_zombie = Zombie.instance()
-	add_child(n_zombie)
-	n_zombie.position = end_room.position
-	n_zombie.set_player(player)
-	$Timer.start(3)
+	pass
+	#var n_zombie = Zombie.instance()
+	#add_child(n_zombie)
+	#n_zombie.position = end_room.position
+	#n_zombie.set_player(player)
+	#$Timer.start(3)
 func _input(event):
 	if event.is_action_pressed('ui_cancel'):
 		player = Player.instance()
@@ -111,12 +95,12 @@ func _input(event):
 		player.position = start_room.position
 		player.set_start(start_room.position)
 		play_mode = true
-		zombie = Zombie.instance()
-		add_child(zombie)
-		zombie.position = end_room.position
-		$Timer.connect("timeout", self, "_on_Timer_timeout")
-		zombie.set_player(player)
-		$Timer.start(3)
+		#zombie = Zombie.instance()
+		#add_child(zombie)
+		#zombie.position = end_room.position
+		#$Timer.connect("timeout", self, "_on_Timer_timeout")
+		#zombie.set_player(player)
+		#$Timer.start(3)
 
 func find_mst(nodes):
 	# Prim's algorithm
@@ -166,8 +150,8 @@ func make_map():
 		full_rect = full_rect.merge(r)
 	var topleft = Map.world_to_map(full_rect.position)
 	var bottomright = Map.world_to_map(full_rect.end)
-	for x in range(topleft.x, bottomright.x):
-		for y in range(topleft.y, bottomright.y):
+	for x in range(topleft.x-10, bottomright.x+10):
+		for y in range(topleft.y-10, bottomright.y+10):
 			Map.set_cell(x, y, 1)	
 #
 #	# Carve rooms
@@ -223,3 +207,10 @@ func find_end_room():
 		if room.position.x > max_x:
 			end_room = room
 			max_x = room.position.x
+	var gate = Sprite.new()
+	gate.texture = load("res://icon.png")
+	end_room.add_child(gate)
+	gate.position = end_room.size
+	gate.position.x -=32
+	gate.position.y = 0
+	gate.centered  = true
