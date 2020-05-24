@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player/player.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Player/Camera2D.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Player/Text.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Player/Inventory.tscn" type="PackedScene" id=5]
+[ext_resource path="res://fonts/HealthBar_over.png" type="Texture" id=6]
+[ext_resource path="res://fonts/HealthBar_progress.png" type="Texture" id=7]
+[ext_resource path="res://fonts/HealthBar_under.png" type="Texture" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 33.5976
@@ -53,3 +56,16 @@ cast_to = Vector2( 2000, 0 )
 [node name="ScentTimer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+
+[node name="HealthBar" type="TextureProgress" parent="."]
+margin_left = -17.6227
+margin_top = 70.491
+margin_right = 82.3773
+margin_bottom = 170.491
+texture_under = ExtResource( 8 )
+texture_over = ExtResource( 6 )
+texture_progress = ExtResource( 7 )
+tint_progress = Color( 0.054902, 0.870588, 0.152941, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

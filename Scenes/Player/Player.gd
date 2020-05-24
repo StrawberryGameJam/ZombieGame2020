@@ -10,6 +10,10 @@ enum MODE{
 export(int) var SPEED = 300
 onready var raycast = $RayCast2D
 
+var max_hp = 1000
+var current_hp
+
+
 const scent_scene = preload("res://Scenes/Scent.tscn")
 
 var scent_trail = []
@@ -24,6 +28,8 @@ func _ready():
 #	ScentTimer.autostart = true
 #	ScentTimer.wait_time = 0.1
 # warning-ignore:return_value_discarded
+	current_hp = max_hp
+	OneHit(0)
 	$ScentTimer.connect("timeout", self, "add_scent")
 	yield(get_tree(), "idle_frame")
 	get_tree().call_group("zombies", "set_player", self)
@@ -134,6 +140,11 @@ func _on_area_exited(area):
 	if area in interacting_areas:
 		interacting_areas.erase(area)
 
+func OneHit(damage):
+	current_hp = current_hp - damage
+	$HealthBar.value = int(float(current_hp/max_hp) * 100)
+	if(current_hp <= 0):
+		kill()
 
  
 func kill():

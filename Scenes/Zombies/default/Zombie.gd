@@ -48,7 +48,7 @@ func _process(delta):
 
 func attack(body):
 	if(body == player):
-		body.kill()
+		body.OneHit(200)
 
 func kill():
 	queue_free()

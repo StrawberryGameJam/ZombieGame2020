@@ -31,6 +31,7 @@ __meta__ = {
 }
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2( 0, -2 )
 color = Color( 0.2, 0.568627, 0.698039, 1 )
 polygon = PoolVector2Array( 1140.72, -87.7794, 1155.9, 716.714, -81.2004, 705.33, -68.3195, -76.6219 )
 
