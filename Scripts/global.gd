@@ -3,7 +3,7 @@ extends Node
 var mouse_override = false
 var normal_mouse = "arrow"
 var pause_menu = preload("res://Scenes/PauseMenu.tscn").instance()
-
+var kills = 0
 var mouse_icons = {
 	"aim": {"icon": preload("res://icons/mouse_icons/sprite_1.png"),
 			"hotspot": Vector2(16,16),
@@ -30,7 +30,7 @@ func _ready():
 	
 func _input(event):
 	if event is InputEventKey and event.scancode in map.keys():
-		if map[event.scancode] == "ui_escape" and event.pressed:
+		if map[event.scancode] == "ui_cancel" and event.pressed:
 			var current_scene = get_tree().get_current_scene()
 			if not get_tree().paused:
 				get_tree().paused = true
@@ -40,7 +40,7 @@ func _input(event):
 				get_tree().paused = false
 				resume_mouse()
 				current_scene.remove_child(pause_menu)
-	
+
 func mouse_mode(icon = "arrow"):
 	if mouse_override:
 		return

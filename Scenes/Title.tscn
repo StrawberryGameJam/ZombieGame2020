@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://fonts/Oswald/Oswald-Medium.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://fonts/Oswald/Text.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scenes/Title.gd" type="Script" id=3]
+[ext_resource path="res://assets/OGG/Musica2.ogg" type="AudioStream" id=4]
+[ext_resource path="res://assets/Menu.jpg" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 160
@@ -31,6 +33,9 @@ __meta__ = {
 }
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
+show_behind_parent = true
+scale = Vector2( -0.0220627, -0.945602 )
 color = Color( 0.2, 0.568627, 0.698039, 1 )
 polygon = PoolVector2Array( 1140.72, -87.7794, 1155.9, 716.714, -81.2004, 705.33, -68.3195, -76.6219 )
 
@@ -63,33 +68,34 @@ __meta__ = {
 }
 
 [node name="NewGame" type="Button" parent="VBoxContainer"]
-margin_top = 200.0
-margin_right = 300.0
-margin_bottom = 275.0
-rect_min_size = Vector2( 300, 75 )
-theme = SubResource( 2 )
-text = "New Game"
-
-[node name="Continue" type="Button" parent="VBoxContainer"]
 margin_top = 279.0
 margin_right = 300.0
 margin_bottom = 354.0
 rect_min_size = Vector2( 300, 75 )
 theme = SubResource( 2 )
-text = "Continue"
+text = "Play"
 
-[node name="Options" type="Button" parent="VBoxContainer"]
+[node name="Credits" type="Button" parent="VBoxContainer"]
 margin_top = 358.0
 margin_right = 300.0
 margin_bottom = 433.0
 rect_min_size = Vector2( 300, 75 )
 theme = SubResource( 2 )
-text = "Options"
+text = "Credits"
 
-[node name="Credits" type="Button" parent="VBoxContainer"]
+[node name="Exit" type="Button" parent="VBoxContainer"]
 margin_top = 437.0
 margin_right = 300.0
 margin_bottom = 512.0
 rect_min_size = Vector2( 300, 75 )
 theme = SubResource( 2 )
-text = "Credits"
+text = "Exit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+show_behind_parent = true
+position = Vector2( 496.363, 277.379 )
+scale = Vector2( 0.704129, 0.735126 )
+texture = ExtResource( 5 )

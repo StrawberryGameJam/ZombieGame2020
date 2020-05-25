@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/TiroSniper.ogg-7174ca45e57e9662137caad43272f5fe.oggstr"
+
+[deps]
+
+source_file="res://assets/OGG/TiroSniper.ogg"
+dest_files=[ "res://.import/TiroSniper.ogg-7174ca45e57e9662137caad43272f5fe.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

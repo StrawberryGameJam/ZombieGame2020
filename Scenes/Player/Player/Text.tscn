@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://fonts/Oswald/Text.tres" type="DynamicFont" id=1]
+
+[node name="Text" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_left = -5.84399
+margin_top = 389.26
+margin_right = 1035.16
+margin_bottom = 614.26
+
+[node name="Panel2" type="Panel" parent="."]
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_left = 30.0
+margin_top = 331.0
+margin_right = 513.0
+margin_bottom = 389.0
+
+[node name="Text" type="RichTextLabel" parent="."]
+margin_left = 52.0519
+margin_top = 408.532
+margin_right = 975.052
+margin_bottom = 584.532
+custom_fonts/normal_font = ExtResource( 1 )
+text = "sfadsfasfasfasfasfasfasfasfasfa"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Speaker" type="RichTextLabel" parent="."]
+margin_left = 56.0
+margin_top = 329.0
+margin_right = 492.0
+margin_bottom = 399.0
+custom_fonts/normal_font = ExtResource( 1 )
+text = "Joao"
+__meta__ = {
+"_edit_use_anchors_": false
+}

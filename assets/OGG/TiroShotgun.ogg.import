@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/TiroShotgun.ogg-f348f8b6057e9f4cdf28ef2d2efdada4.oggstr"
+
+[deps]
+
+source_file="res://assets/OGG/TiroShotgun.ogg"
+dest_files=[ "res://.import/TiroShotgun.ogg-f348f8b6057e9f4cdf28ef2d2efdada4.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

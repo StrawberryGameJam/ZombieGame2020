@@ -1,11 +1,11 @@
 extends KinematicBody2D
  
-const MOVE_SPEED = 150
+var MOVE_SPEED = 50
  
  
 var player = null
 var obj = Vector2()
- 
+var killed = false
 func _ready():
 	$AnimationPlayer.play("Idle")
 	add_to_group("zombies")
@@ -15,7 +15,7 @@ func _ready():
 
 # warning-ignore:unused_argument
 func _process(delta):
-	if player == null:
+	if player == null or killed:
 		return
 	anim_handler()
 	
@@ -61,12 +61,47 @@ func attack(body):
 		return
 	if(body == player):
 		$AnimationPlayer.play("Attack")
+		body.kill()
 
 func attack_frame():
 	player.kill()
 
 func kill():
+	killed = true
+	$CollisionShape2D.queue_free()
+#	$Sprite.queue_free()
+	$Area2D.queue_free()
+	set_process(false)
+	$AnimationPlayer.play("Death")
+	
+	var sound = randi() % 4
+	var speech_player = AudioStreamPlayer2D.new()
+	add_child(speech_player)
+	var audio_file1 = "res://assets/OGG/ZumbiMorrendo1.ogg"
+	var audio_file2 = "res://assets/OGG/ZumbiMorrendo2.ogg"
+
+	if sound == 0:
+		print("ola amigo cade meu som?1")
+		var sfx = load(audio_file1) 
+		
+		sfx.set_loop(false)
+		
+		speech_player.stream = sfx
+		
+		speech_player.play()
+	
+	elif sound == 1:
+		if File.new().file_exists(audio_file2):
+			print("ola amigo cade meu som?2")
+		var sfx = load(audio_file2) 
+		sfx.set_loop(false)
+		speech_player.stream = sfx
+		speech_player.play()
+	Global.kills += 1
+	yield(get_tree().create_timer(1), 'timeout')
+	
 	queue_free()
+ 
  
 func set_player(p):
 	player = p

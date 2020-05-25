@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ZumbiMorrendo1.ogg-91bc52b5e1fbcd7328ac8cd9874ae71c.oggstr"
+
+[deps]
+
+source_file="res://assets/OGG/ZumbiMorrendo1.ogg"
+dest_files=[ "res://.import/ZumbiMorrendo1.ogg-91bc52b5e1fbcd7328ac8cd9874ae71c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
