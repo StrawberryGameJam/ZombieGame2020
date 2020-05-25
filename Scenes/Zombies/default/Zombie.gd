@@ -1,6 +1,6 @@
 extends KinematicBody2D
  
-var MOVE_SPEED = 50
+var MOVE_SPEED = 50 + (Global.kills)
  
  
 var player = null

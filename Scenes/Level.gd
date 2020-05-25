@@ -129,7 +129,8 @@ func _on_Timer_timeout():
 		n_zombie.position.x = room.x
 		n_zombie.position.y = room.y
 		n_zombie.set_player(player)
-	$Timer.start(3)
+	
+	$Timer.start(min(10/(Global.kills+1),3))
 #func _input(event):
 #	if event.is_action_pressed('ui_cancel'):
 #
